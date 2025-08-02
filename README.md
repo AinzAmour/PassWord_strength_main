@@ -27,8 +27,8 @@ This project provides an easy-to-use tool to check how strong your passwords are
 - HTML
 - CSS
 - JavaScript
-- jQuery
-- Bootstrap
+- ~~jQuery~~
+- ~~Bootstrap~~
 ---
 
 ## Project Live Location 🌐
