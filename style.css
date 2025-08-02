@@ -1,0 +1,389 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  /* Dark theme variables - based on dark blue-purple gradient */
+  --bg-gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #8b5cf6 100%);
+  --container-bg-dark: rgba(255, 255, 255, 0.1);
+  --text-color-dark: #ffffff;
+  --input-bg-dark: rgba(255, 255, 255, 0.1);
+  --input-border-dark: rgba(255, 255, 255, 0.2);
+  --strength-bg-dark: rgba(255, 255, 255, 0.1);
+  --divider-dark: rgba(255, 255, 255, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.3);
+  
+  /* Light theme variables - based on green gradient */
+  --bg-gradient-light: linear-gradient(135deg, #2d5016 0%, #4a7c59 25%, #7fb069 50%, #a7c957 75%, #f2f2f2 100%);
+  --container-bg-light: rgba(255, 255, 255, 0.9);
+  --text-color-light: #333333;
+  --input-bg-light: rgba(255, 255, 255, 0.8);
+  --input-border-light: rgba(0, 0, 0, 0.1);
+  --strength-bg-light: rgba(0, 0, 0, 0.1);
+  --divider-light: rgba(0, 0, 0, 0.1);
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  
+  /* Default to dark theme */
+  --bg-gradient: var(--bg-gradient-dark);
+  --container-bg: var(--container-bg-dark);
+  --text-color: var(--text-color-dark);
+  --input-bg: var(--input-bg-dark);
+  --input-border: var(--input-border-dark);
+  --strength-bg: var(--strength-bg-dark);
+  --divider: var(--divider-dark);
+  --shadow: var(--shadow-dark);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  flex-direction: column;
+  transition: background 0.3s ease;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.theme-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--input-border);
+  background: var(--container-bg);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.theme-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.theme-icon {
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+}
+
+.container {
+  position: relative;
+  width: 400px;
+  border-radius: 20px 20px 0 0;
+  padding: 30px;
+  background: var(--container-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--input-border);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 70px;
+  box-shadow: 0 8px 32px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.container h2 {
+  color: var(--text-color);
+  font-weight: 600;
+  text-align: center;
+  font-size: 1.5em;
+  text-shadow: 0 2px 4px var(--shadow);
+  transition: color 0.3s ease;
+}
+
+
+
+.container .inputArea {
+  position: relative;
+  width: 100%;
+}
+
+.container .inputArea input {
+  position: relative;
+  width: 100%;
+  background: var(--input-bg);
+  border: 2px solid var(--input-border);
+  border-radius: 10px;
+  outline: none;
+  padding: 12px 15px;
+  padding-right: 50px;
+  color: var(--text-color);
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+}
+
+.container .inputArea input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+}
+
+.container .strengthMeter {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--strength-bg);
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.container .strengthMeter::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  transition: 0.5s;
+  background: #f00;
+}
+
+.container.weak .strengthMeter::before {
+  width: 10%;
+  background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+  filter: drop-shadow(0 0 8px #ff6b6b) drop-shadow(0 0 15px #ff6b6b);
+}
+
+.container.moderate .strengthMeter::before {
+  width: 70%;
+  background: linear-gradient(90deg, #feca57, #ff9ff3);
+  filter: drop-shadow(0 0 8px #feca57) drop-shadow(0 0 15px #feca57);
+}
+
+.container.strong .strengthMeter::before {
+  width: 100%;
+  background: linear-gradient(90deg, #48dbfb, #0abde3);
+  filter: drop-shadow(0 0 8px #48dbfb) drop-shadow(0 0 15px #48dbfb);
+}
+
+.container .strengthMeter::after {
+  position: absolute;
+  top: -45px;
+  left: 30px;
+  transition: 0.5s;
+  color: var(--text-color);
+  font-weight: 600;
+  text-shadow: 0 2px 4px var(--shadow);
+}
+
+.container.container.weak .strengthMeter::after {
+  content: "Weak Password";
+  color: #ff6b6b;
+  filter: drop-shadow(0 0 5px #ff6b6b);
+}
+
+.container.container.container.moderate .strengthMeter::after {
+  content: "Moderate Password";
+  color: #feca57;
+  filter: drop-shadow(0 0 5px #feca57);
+}
+
+.container.container.container.container.strong .strengthMeter::after {
+  content: "Strong Password";
+  color: #48dbfb;
+  filter: drop-shadow(0 0 5px #48dbfb);
+}
+
+.copy-btn {
+  position: absolute;
+  top: 50%;
+  right: 55px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.copy-btn:hover {
+  background: rgba(72, 219, 251, 0.1);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.copy-btn.copied {
+  background: #48dbfb;
+  color: white;
+  opacity: 1;
+}
+
+.show {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  background: var(--input-bg);
+  border: 2px solid var(--input-border);
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: all 0.3s ease;
+}
+
+.show:hover {
+  background: var(--container-bg);
+  border-color: #667eea;
+}
+
+.show::before {
+  content: "Show";
+  font-size: 0.6em;
+  color: var(--text-color);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.show.hide::before {
+  content: "Hide";
+}
+
+.result {
+  margin-top: 0;
+  padding: 20px;
+  background: var(--container-bg);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 20px 20px;
+  color: var(--text-color);
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--input-border);
+  box-shadow: 0 8px 32px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.result h3 {
+  color: #48dbfb;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-shadow: 0 2px 4px var(--shadow);
+}
+
+/* Light theme specific styling for result heading */
+body.light-theme .result h3 {
+  color: #2d5016;
+}
+
+.result.empty h3 {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.result-item {
+  margin: 10px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--divider);
+  transition: border-color 0.3s ease;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item strong {
+  color: #48dbfb;
+  margin-right: 10px;
+  text-shadow: 0 1px 2px var(--shadow);
+}
+
+.breach-status {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid var(--divider);
+}
+
+.breach-warning {
+  color: #ff6b6b;
+  font-weight: 600;
+  text-shadow: 0 1px 2px var(--shadow);
+  animation: pulse 2s infinite;
+}
+
+.breach-safe {
+  color: #48dbfb;
+  font-weight: 600;
+  text-shadow: 0 1px 2px var(--shadow);
+}
+
+.result.breached {
+  border-left: 4px solid #ff6b6b;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Light theme styles */
+body.light-theme {
+  --bg-gradient: var(--bg-gradient-light);
+  --container-bg: var(--container-bg-light);
+  --text-color: var(--text-color-light);
+  --input-bg: var(--input-bg-light);
+  --input-border: var(--input-border-light);
+  --strength-bg: var(--strength-bg-light);
+  --divider: var(--divider-light);
+  --shadow: var(--shadow-light);
+}
+
+.footer {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.footer p {
+  color: var(--text-color);
+  font-size: 1.2em;
+  font-weight: 500;
+  text-shadow: 0 2px 4px var(--shadow);
+  transition: color 0.3s ease;
+}
+
+.footer em {
+  font-style: italic;
+  font-weight: 600;
+}
