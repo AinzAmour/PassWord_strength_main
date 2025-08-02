@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Password Strength Checker</title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">
+            <span class="theme-icon">🌙</span>
+        </button>
+    </div>
+    <div class="container">
+        <h2>Password Strength Checker</h2>
+        <div class="inputArea">
+            <input type="password" placeholder=" Password" id="YourPassword">
+            <div class="show"></div>
+            <div class="copy-btn" id="copyBtn" title="Copy to clipboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="strengthMeter"></div>
+    </div>
+    <!-- partial -->
+    <footer class="footer">
+        <p><em>AINZ</em></p>
+    </footer>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
