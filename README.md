@@ -44,5 +44,5 @@ Thank you for checking out our Password Strength Checker. We hope these recent u
 ---
 
 ## Hashtags 📌
-
+#PasswordStrengthChecker, #WebDevelopment, #JavaScript, #HTML, #CSS, #CyberSecurity, #FrontendDevelopment, #OpenSource, #WebDev, #CodeNewbie
 
