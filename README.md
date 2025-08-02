@@ -33,7 +33,7 @@ This project provides an easy-to-use tool to check how strong your passwords are
 
 ## Project Live Location 🌐
 
-You can access the live version of this project online. Try it out and see how strong your passwords are!
+You can access the live version of this project online. [Password Strength Checker]([https://password-strength.vercel.app/](https://ainzamour.github.io/PassWord_strength_main/)) Try it out and see how strong your passwords are!
 
 ---
 
